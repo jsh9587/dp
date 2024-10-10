@@ -11,11 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('news_author', function (Blueprint $table) {
+        Schema::create('news_hash_tag', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')
-                ->constrained('users')
-                ->comment('뉴스 저자 ID');
+            $table->integer('news_id')->index()->comment('뉴스 ID');
+            $table->string('hash_tag',100)->comment('해시태그');
             $table->timestamps();
         });
     }
@@ -25,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('news_author');
+        Schema::dropIfExists('news_hash_tag');
     }
 };

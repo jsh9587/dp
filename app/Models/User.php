@@ -3,6 +3,7 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Models\News\NewsAuthor;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -43,5 +44,14 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+    public function permits()
+    {
+        return $this->belongsToMany(Permit::class, 'user_permit', 'user_id', 'permit_id');
+    }
+
+    public function newsAuthors()
+    {
+        return $this->hasMany(NewsAuthor::class, 'user_id', 'id');
     }
 }

@@ -21,7 +21,9 @@ class AuthController extends Controller
         $request->validated();
         // 로그인 서비스 호출
         $bool = $this->authService->adminLogin($request->email, $request->password);
-        return $bool?redirect('/admin/dashboard'):redirect('/admin/login');
+        return $bool
+            ? redirect('/admin/dashboard')
+            : redirect('/admin/login')->withErrors(['email' => '이메일 또는 비밀번호가 올바르지 않습니다.']);
     }
 
     public function adminLogout()

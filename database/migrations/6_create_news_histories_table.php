@@ -13,6 +13,8 @@ return new class extends Migration
     {
         Schema::create('news_history', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('news_id')->constrained('news')->comment('뉴스 ID');
+            $table->text('previous_content')->comment('변경전 내용');
             $table->timestamps();
         });
     }

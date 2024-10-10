@@ -2,6 +2,7 @@
 namespace App\Services;
 
 use App\Interfaces\Auth\AuthRepositoryInterface;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Session;
 
@@ -14,17 +15,17 @@ class AuthService
         $this->authRepository = $authRepository;
     }
 
-    public function adminLogin(string $email, string $password):bool
+    public function adminLogin(string $email, string $password): bool
     {
-        // 로그인 로직 호출
+        // 로그인 로직 호출 (사용자를 인증)
         $user = $this->authRepository->authenticate($email, $password);
 
-        if( $user ){
-            Session::put('user_id', $user->id);
-            Session::put('user_email', $user->email);
-            Session::put('user_name', $user->name);
+        if ($user) {
+            // Auth::login()으로 세션에 로그인 정보 저장
+            Auth::login($user);  // $user는 Eloquent 모델이어야 함
+            return true;
         }
 
-        return (bool)$user;
+        return false;
     }
 }

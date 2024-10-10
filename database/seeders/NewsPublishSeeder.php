@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\News\NewsPublish;
 use Illuminate\Database\Seeder;
 
 class NewsPublishSeeder extends Seeder
@@ -13,5 +13,6 @@ class NewsPublishSeeder extends Seeder
     public function run(): void
     {
         //
+        NewsPublish::factory()->count(500)->create();
     }
 }

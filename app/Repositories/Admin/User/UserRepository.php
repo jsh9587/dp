@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Repositories\Admin;
+namespace App\Repositories\Admin\User;
 
 use App\Interfaces\Admin\User\UserRepositoryInterface;
 use App\Models\User;

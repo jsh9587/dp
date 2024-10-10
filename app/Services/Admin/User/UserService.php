@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Services\Admin;
+namespace App\Services\Admin\User;
 
-use App\Interfaces\Admin\UserRepositoryInterface;
-use App\Interfaces\Admin\UserServiceInterface;
+use App\Interfaces\Admin\User\UserRepositoryInterface;
+use App\Interfaces\Admin\User\UserServiceInterface;
 use Illuminate\Database\Eloquent\Collection;
 
 class UserService implements UserServiceInterface

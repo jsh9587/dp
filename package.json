@@ -16,6 +16,8 @@
     },
     "dependencies": {
         "bootstrap": "^5.3.3",
+        "ckeditor4": "^4.25.0",
+        "ckeditor5": "^43.1.1",
         "datatables.net": "^2.1.7",
         "datatables.net-bs4": "^2.1.7",
         "jquery": "^3.7.1",

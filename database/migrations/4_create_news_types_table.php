@@ -11,8 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('news_types', function (Blueprint $table) {
+        Schema::create('news_type', function (Blueprint $table) {
             $table->id();
+            $table->string('name')->comment('자체기사,보도자료');
             $table->timestamps();
         });
     }
@@ -22,6 +23,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('news_types');
+        Schema::dropIfExists('news_type');
     }
 };

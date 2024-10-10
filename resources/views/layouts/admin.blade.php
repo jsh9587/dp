@@ -13,6 +13,11 @@
     <!-- Custom styles for this template-->
     @vite("resources/css/sb-admin-2.min.css")
     @vite("resources/vendor/fontawesome-free/css/all.min.css")
+    @vite("resources/vendor/jquery/jquery.min.js")
+    @vite("resources/vendor/bootstrap/js/bootstrap.bundle.min.js")
+    @vite("resources/vendor/jquery-easing/jquery.easing.min.js")
+    @vite("resources/js/sb-admin-2.min.js")
+    <script src="{{ config('app.url') }}/ckeditor/build/ckeditor.js"></script>
 </head>
 <body id="page-top">
 <!-- Page Wrapper -->
@@ -20,7 +25,11 @@
     @include('admin.include.side-bar')
     <!-- Content Wrapper -->
     <div id="content-wrapper" class="d-flex flex-column">
-        {{ $slot }}
+        <div id="content">
+            @include('admin.include.top-bar')
+            {{ $slot }}
+        </div>
+        <!-- End of Main Content -->
     </div>
     <!-- Scroll to Top Button-->
     <a class="scroll-to-top rounded" href="#page-top">
@@ -46,13 +55,24 @@
         </div>
     </div>
 </div>
+
+@if(session('error'))
+    <script>
+        alert("{{ session('error') }}");
+    </script>
+@endif
+@if ($errors->any())
+    <script>
+        alert("{{ implode('\n', $errors->all()) }}");
+    </script>
+@endif
 <!-- Bootstrap core JavaScript-->
-@vite("resources/vendor/jquery/jquery.min.js")
-@vite("resources/vendor/bootstrap/js/bootstrap.bundle.min.js")
-@vite("resources/vendor/jquery-easing/jquery.easing.min.js")
-@vite("resources/js/sb-admin-2.min.js")
+
 @vite("resources/vendor/chart.js/Chart.min.js")
 @vite("resources/js/demo/chart-area-demo.js")
 @vite("resources/js/demo/chart-pie-demo.js")
+@vite("resources/vendor/datatables/jquery.dataTables.min.js")
+@vite("resources/vendor/datatables/dataTables.bootstrap4.min.js")
+@vite("resources/js/demo/datatables-demo.js")
 </body>
 </html>

@@ -13,6 +13,8 @@ return new class extends Migration
     {
         Schema::create('category', function (Blueprint $table) {
             $table->id();
+            $table->string('group')->comment('카테고리 그룹');
+            $table->string('name')->nullable(false)->comment('카테고리명');
             $table->timestamps();
         });
     }

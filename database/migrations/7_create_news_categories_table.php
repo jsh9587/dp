@@ -13,6 +13,9 @@ return new class extends Migration
     {
         Schema::create('news_category', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('news_id')->constrained('news')->comment('뉴스 ID');
+            $table->foreignId('category_id')->constrained('category')->comment('카테고리 ID');
+            // 복합 기본 키 설정
             $table->timestamps();
         });
     }

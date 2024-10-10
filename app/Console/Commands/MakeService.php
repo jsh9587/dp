@@ -12,6 +12,7 @@ class MakeService extends Command
 
     public function handle()
     {
+        // {name}에서 '/' 문자가 포함된 경우, 하위 디렉토리 처리
         $name = $this->argument('name');
         $path = app_path("Services/{$name}.php");
 
@@ -20,11 +21,19 @@ class MakeService extends Command
             return;
         }
 
-        // Stub 파일에서 내용을 가져와 치환 후 저장
-        $stub = File::get(base_path('stubs/service.stub'));
-        $stub = str_replace('{{ class }}', $name, $stub);
+        // 스텁 파일의 경로 설정
+        $stubPath = base_path('stubs/service.stub');
+        if (!File::exists($stubPath)) {
+            $this->error('Stub file not found!');
+            return;
+        }
 
-        File::ensureDirectoryExists(app_path('Services'));
+        // Stub 파일에서 내용을 가져와 치환 후 저장
+        $stub = File::get($stubPath);
+        $stub = str_replace('{{ class }}', class_basename($name), $stub);
+
+        // 디렉토리 존재 여부 확인 및 생성
+        File::ensureDirectoryExists(dirname($path));
         File::put($path, $stub);
 
         $this->info('Service created successfully.');

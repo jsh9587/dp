@@ -11,17 +11,25 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('user_permits', function (Blueprint $table) {
-            $table->id();
+        Schema::create('user_permit', function (Blueprint $table) {
+            $table->foreignId('user_id')
+                ->constrained('users')
+                ->comment('사용자 ID');
+            $table->foreignId('permit_id')
+                ->constrained('permits') // permits 테이블의 id 컬럼을 참조
+                ->comment('허가 ID');
+            // 복합 기본 키 설정
+            $table->primary(['permit_id', 'user_id']);
             $table->timestamps();
         });
     }
+
 
     /**
      * Reverse the migrations.
      */
     public function down(): void
     {
-        Schema::dropIfExists('user_permits');
+        Schema::dropIfExists('user_permit');
     }
 };
